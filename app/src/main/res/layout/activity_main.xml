@@ -74,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:text="Tiket anda"
                 android:textColor="@color/white"
-                android:backgroundTint="#03A9F4"                        app:layout_anchor="@+id/imageView"
+                android:backgroundTint="#03A9F4"
+                app:layout_anchor="@+id/imageView"
                 app:layout_anchorGravity="top|center" />
 
         </LinearLayout>

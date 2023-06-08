@@ -39,6 +39,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -65,7 +66,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:background="@color/primary"
+                        android:background="@color/black"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -138,24 +139,15 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
-                            <androidx.appcompat.widget.AppCompatSpinner
+                            <EditText
                                 android:id="@+id/spBerangkat"
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_below="@+id/tvBerangkat"
+                                android:hint="Kota Asal"
                                 android:layout_marginTop="10dp"
                                 android:background="@drawable/spinner_background"
                                 android:spinnerMode="dropdown" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/tvBerangkat"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="20dp"
-                                android:src="@drawable/ic_spinner" />
 
                         </RelativeLayout>
 
@@ -181,24 +173,15 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
-                            <androidx.appcompat.widget.AppCompatSpinner
+                            <EditText
                                 android:id="@+id/spTujuan"
+                                android:hint="Kota Tujuan"
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_below="@+id/tvTujuan"
                                 android:layout_marginTop="10dp"
                                 android:background="@drawable/spinner_background"
                                 android:spinnerMode="dropdown" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/tvTujuan"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="20dp"
-                                android:src="@drawable/ic_spinner" />
 
                         </RelativeLayout>
 
@@ -208,184 +191,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Anak-anak (16+ tahun)"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/imageMinus1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_minus"
-                                app:tint="@color/primary" />
-
-                            <TextView
-                                android:id="@+id/tvJmlAnak"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:text="0"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
-
-                            <ImageView
-                                android:id="@+id/imageAdd1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_add"
-                                app:tint="@color/primary" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Dewasa"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/imageMinus2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_minus"
-                                app:tint="@color/primary" />
-
-                            <TextView
-                                android:id="@+id/tvJmlDewasa"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:text="0"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
-
-                            <ImageView
-                                android:id="@+id/imageAdd2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_add"
-                                app:tint="@color/primary" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp">
-
-                        <TextView
-                            android:id="@+id/tvKelas"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tipe / Kelas"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/spKelas"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:layout_below="@+id/tvKelas"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/spinner_background"
-                            android:spinnerMode="dropdown" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvKelas"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="20dp"
-                            android:src="@drawable/ic_spinner" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tanggal Berangkat"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/inputTanggal"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:backgroundTint="@color/primary"
-                                android:focusableInTouchMode="false"
-                                android:hint="Masukan tanggal"
-                                android:imeOptions="actionNext"
-                                android:inputType="date"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="20dp"
                         android:orientation="vertical">
@@ -421,13 +227,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_margin="30dp"
-                android:text="Jemput Sekarang"
+                android:text="Order"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:theme="@style/Theme.MaterialComponents"
-                app:backgroundTint="@color/primary"
+                app:backgroundTint="@color/black"
                 app:cornerRadius="50dp"
                 app:elevation="5dp"
                 app:rippleColor="@color/primary" />
