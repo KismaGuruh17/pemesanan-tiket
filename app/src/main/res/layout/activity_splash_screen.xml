@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen"
     android:background="#03A9F4"
-    android:id="@+id/splash_screen">
+    tools:context=".SplashScreen">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:src="@drawable/background"/>
+        android:scaleType="center"
+        android:src="@drawable/background" />
 
     <ImageView
         android:id="@+id/gambarSplash"
@@ -33,11 +32,12 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="135dp"
         android:layout_marginEnd="135dp"
-        android:layout_marginBottom="165dp"
+        android:layout_marginBottom="500dp"
+        android:background="#9E1B1717"
         android:fontFamily="@font/bai_jamjuree_bold"
         android:gravity="center"
-        android:text="PTS.Ticket"
-        android:textColor="@color/white"
+        android:text="TravelZen"
+        android:textColor="#FFFFFF"
         android:textSize="24dp"
         android:textStyle="bold" />
 
