@@ -10,6 +10,12 @@
     android:id="@+id/splash_screen">
 
     <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:src="@drawable/background"/>
+
+    <ImageView
         android:id="@+id/gambarSplash"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -27,12 +33,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="135dp"
         android:layout_marginEnd="135dp"
-        android:textSize="24dp"
-        android:gravity="center"
         android:layout_marginBottom="165dp"
-        android:textStyle="bold"
+        android:fontFamily="@font/bai_jamjuree_bold"
+        android:gravity="center"
         android:text="PTS.Ticket"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:textStyle="bold" />
 
     <ProgressBar
         android:layout_width="wrap_content"
