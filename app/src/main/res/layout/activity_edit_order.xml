@@ -13,10 +13,9 @@
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbaredit"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:navigationIcon="@drawable/ic_back">
+            android:layout_height="?actionBarSize">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
-                    android:text="Pesan Tiket"
+                    android:text="Edit Tiket"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />

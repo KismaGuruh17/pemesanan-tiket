@@ -1,6 +1,7 @@
 package com.example.pemesanantiket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
 import android.app.NotificationManager;
@@ -88,6 +89,9 @@ public class EditOrder extends AppCompatActivity {
 
 
         });
+        Toolbar toolbar = findViewById(R.id.toolbaredit);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 }

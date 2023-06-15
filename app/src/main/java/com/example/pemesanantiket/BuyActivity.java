@@ -1,6 +1,7 @@
 package com.example.pemesanantiket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
 
@@ -55,7 +56,6 @@ public class BuyActivity extends AppCompatActivity {
         editTjn = findViewById(R.id.spTujuan);
 
 
-
         createNotificationChannel();
 
 
@@ -94,6 +94,9 @@ public class BuyActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Toolbar toolbar = findViewById(R.id.toolbarbuy);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
     public void sendNotification() {
@@ -104,7 +107,7 @@ public class BuyActivity extends AppCompatActivity {
 
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
 // for update notif
-        notifyBuilder.addAction(R.drawable.ic_update, "Edit Data", updatePendingIntent);
+//        notifyBuilder.addAction(R.drawable.ic_update, "Edit Data", updatePendingIntent);
 
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
 
@@ -127,7 +130,7 @@ public class BuyActivity extends AppCompatActivity {
     }
 
     private NotificationCompat.Builder getNotificationBuilder() {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, History.class);
         PendingIntent notificationPendingIntent = PendingIntent.getActivity(this,
                 NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
