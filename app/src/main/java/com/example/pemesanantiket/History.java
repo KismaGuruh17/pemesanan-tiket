@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,15 @@ public class History extends AppCompatActivity {
     private UserAdapter userAdapter;
     private List<User> list = new ArrayList<>();
     private AlertDialog.Builder dialog;
+
+    private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
+
+    private NotificationManager mNotifyManager;
+
+    private static final int NOTIFICATION_ID = 0;
+
+    private static final String ACTION_UPDATE_NOTIFICATION =
+            "com.example.android.notifyme.ACTION_UPDATE_NOTIFICATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +55,7 @@ public class History extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (i){
                             case 0:
-                                Intent intent = new Intent(History.this, BuyActivity.class);
+                                Intent intent = new Intent(History.this, EditOrder.class);
                                 intent.putExtra("uid", list.get(position).uid);
                                 startActivity(intent);
                                 break;

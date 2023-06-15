@@ -1,9 +1,16 @@
 package com.example.pemesanantiket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +28,15 @@ public class BuyActivity extends AppCompatActivity {
     private int uid = 0;
     private boolean isEdit = false;
 
+    public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
+
+    public NotificationManager mNotifyManager;
+
+    public static final int NOTIFICATION_ID = 0;
+
+    public static final String ACTION_UPDATE_NOTIFICATION =
+            "com.example.android.notify.ACTION_UPDATE_NOTIFICATION";
+
     Spinner spinner;
 
     @Override
@@ -32,6 +48,10 @@ public class BuyActivity extends AppCompatActivity {
         editNope = findViewById(R.id.inputTelepon);
         editBrkt = findViewById(R.id.spBerangkat);
         editTjn = findViewById(R.id.spTujuan);
+
+
+
+        createNotificationChannel();
 
 
         btnSave = findViewById(R.id.btnCheckout);
@@ -54,7 +74,7 @@ public class BuyActivity extends AppCompatActivity {
         }
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { sendNotification();
                 if (isEdit) {
                     database.userDao().update(uid, editNama.getText().toString(), editNope.getText().toString(), editBrkt.getText().toString(), editTjn.getText().toString());
                 } else {
@@ -63,5 +83,62 @@ public class BuyActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+    }
+    public void sendNotification() {
+
+        Intent updateIntent = new Intent(ACTION_UPDATE_NOTIFICATION);
+        PendingIntent updatePendingIntent = PendingIntent.getBroadcast
+                (this, NOTIFICATION_ID, updateIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
+// for update notif
+        notifyBuilder.addAction(R.drawable.ic_update, "Edit Data", updatePendingIntent);
+
+        mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
+
+    }
+    public void createNotificationChannel() {
+        mNotifyManager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >=
+                android.os.Build.VERSION_CODES.O) {
+
+            // Create a NotificationChannel
+            NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID,
+                    "Mascot Notification", NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setDescription("Notification from Mascot");
+            mNotifyManager.createNotificationChannel(notificationChannel);
+        }
+    }
+
+    private NotificationCompat.Builder getNotificationBuilder() {
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent notificationPendingIntent = PendingIntent.getActivity(this,
+                NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+
+
+        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
+                .setContentTitle("Order")
+                .setContentText("Order Selesai!")
+                .setContentIntent(notificationPendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setSmallIcon(R.drawable.ic_android);
+        return notifyBuilder;
+    }
+    public class NotificationReceiver extends BroadcastReceiver {
+
+        public NotificationReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Update the notification
+        }
     }
 }
