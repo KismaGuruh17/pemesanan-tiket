@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.pemesanantiket.database.AppDatabase;
 import com.example.pemesanantiket.database.userEntity.User;
@@ -25,6 +26,10 @@ public class BuyActivity extends AppCompatActivity {
     private EditText editNama, editNope, editBrkt, editTjn;
     private Button btnSave;
     private AppDatabase database;
+    Toast toastOrder;
+    String orderToast;
+    int duration;
+    Context context;
     private int uid = 0;
     private boolean isEdit = false;
 
@@ -56,6 +61,11 @@ public class BuyActivity extends AppCompatActivity {
 
         btnSave = findViewById(R.id.btnCheckout);
 
+        duration = Toast.LENGTH_SHORT;
+        orderToast = "Order Berhasil";
+        context = getApplicationContext();
+        toastOrder = Toast.makeText(context,orderToast,duration);
+
         database = AppDatabase.getInstance(getApplicationContext());
 
         Intent intent = getIntent();
@@ -75,6 +85,7 @@ public class BuyActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { sendNotification();
+                toastOrder.show();
                 if (isEdit) {
                     database.userDao().update(uid, editNama.getText().toString(), editNope.getText().toString(), editBrkt.getText().toString(), editTjn.getText().toString());
                 } else {
