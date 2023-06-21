@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mode_switch=findViewById(R.id.mode_switch);
 
-
         btnPesawat = findViewById(R.id.btnPesawat);
         btnKapal = findViewById(R.id.btnKapal);
         btnKereta = findViewById(R.id.btnKereta);
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         btnKapal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 Intent intent = new Intent(MainActivity.this, BuyActivity.class);
                 startActivity(intent);

@@ -16,16 +16,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.pemesanantiket.database.AppDatabase;
 import com.example.pemesanantiket.database.userEntity.User;
 
+import java.util.Objects;
+
 public class BuyActivity extends AppCompatActivity {
 
     private EditText editNama, editNope, editBrkt, editTjn;
-    private Button btnSave;
     private AppDatabase database;
     Toast toastOrder;
     String orderToast;
@@ -34,16 +34,14 @@ public class BuyActivity extends AppCompatActivity {
     private int uid = 0;
     private boolean isEdit = false;
 
-    public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
-
+    public static final String PRIMARY_CHANNEL_ID_1 = "Order, Update";
+    public static final String PRIMARY_CHANNEL_ID_2 = "Hapus";
     public NotificationManager mNotifyManager;
 
     public static final int NOTIFICATION_ID = 0;
 
     public static final String ACTION_UPDATE_NOTIFICATION =
             "com.example.android.notify.ACTION_UPDATE_NOTIFICATION";
-
-    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +53,9 @@ public class BuyActivity extends AppCompatActivity {
         editBrkt = findViewById(R.id.spBerangkat);
         editTjn = findViewById(R.id.spTujuan);
 
-
         createNotificationChannel();
 
-
-        btnSave = findViewById(R.id.btnCheckout);
+        Button btnSave = findViewById(R.id.btnCheckout);
 
         duration = Toast.LENGTH_SHORT;
         orderToast = "Order Berhasil";
@@ -78,7 +74,6 @@ public class BuyActivity extends AppCompatActivity {
             editBrkt.setText(user.keberangkatan);
             editTjn.setText(user.tujuan);
 
-
         } else {
             isEdit = false;
         }
@@ -94,37 +89,35 @@ public class BuyActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         Toolbar toolbar = findViewById(R.id.toolbarbuy);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
     }
     public void sendNotification() {
 
         Intent updateIntent = new Intent(ACTION_UPDATE_NOTIFICATION);
-        PendingIntent updatePendingIntent = PendingIntent.getBroadcast
-                (this, NOTIFICATION_ID, updateIntent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent updatePendingIntent = PendingIntent.getBroadcast (this, NOTIFICATION_ID, updateIntent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
 // for update notif
-//        notifyBuilder.addAction(R.drawable.ic_update, "Edit Data", updatePendingIntent);
+        notifyBuilder.addAction(R.drawable.ic_update, "Edit Data", updatePendingIntent);
 
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
 
     }
     public void createNotificationChannel() {
-        mNotifyManager = (NotificationManager)
-                getSystemService(NOTIFICATION_SERVICE);
-        if (android.os.Build.VERSION.SDK_INT >=
-                android.os.Build.VERSION_CODES.O) {
+        mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
             // Create a NotificationChannel
-            NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID,
-                    "Mascot Notification", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID_1,
+                    "Order Notif", NotificationManager.IMPORTANCE_HIGH);
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             notificationChannel.enableVibration(true);
-            notificationChannel.setDescription("Notification from Mascot");
+            notificationChannel.setDescription("Notification from Order");
             mNotifyManager.createNotificationChannel(notificationChannel);
         }
     }
@@ -134,10 +127,9 @@ public class BuyActivity extends AppCompatActivity {
         PendingIntent notificationPendingIntent = PendingIntent.getActivity(this,
                 NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
-
-        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
-                .setContentTitle("Order")
-                .setContentText("Order Selesai!")
+        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID_1)
+                .setContentTitle("Infoo!")
+                .setContentText("Pemesanan Selesai!")
                 .setContentIntent(notificationPendingIntent)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -145,6 +137,13 @@ public class BuyActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.ic_android);
         return notifyBuilder;
     }
+
+    public void updateNotification() {
+        Intent notificationIntent = new Intent(this, EditOrder.class);
+
+
+    }
+
     public class NotificationReceiver extends BroadcastReceiver {
 
         public NotificationReceiver() {
@@ -153,6 +152,7 @@ public class BuyActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Update the notification
+            updateNotification();
         }
     }
 }

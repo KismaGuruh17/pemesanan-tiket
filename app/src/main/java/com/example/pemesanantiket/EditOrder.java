@@ -1,13 +1,18 @@
 package com.example.pemesanantiket;
 
+import static com.example.pemesanantiket.BuyActivity.PRIMARY_CHANNEL_ID_1;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,16 +21,15 @@ import android.widget.EditText;
 import com.example.pemesanantiket.database.AppDatabase;
 import com.example.pemesanantiket.database.userEntity.User;
 
+import java.util.Objects;
+
 
 public class EditOrder extends AppCompatActivity {
 
     private EditText editNama, editNope, editBrkt, editTjn;
-    private Button btnUpdateOrd;
     private AppDatabase database;
     private int uid = 0;
     private boolean isEdit = false;
-
-    private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
 
     private NotificationManager mNotifyManager;
 
@@ -43,9 +47,9 @@ public class EditOrder extends AppCompatActivity {
         editBrkt = findViewById(R.id.spBerangkat);
         editTjn = findViewById(R.id.spTujuan);
 
+        createNotificationChannel();
 
-
-        btnUpdateOrd = findViewById(R.id.btnUpdateOrder);
+        Button btnUpdateOrd = findViewById(R.id.btnUpdateOrder);
 
         database = AppDatabase.getInstance(getApplicationContext());
 
@@ -58,8 +62,6 @@ public class EditOrder extends AppCompatActivity {
             editNope.setText(user.nope);
             editBrkt.setText(user.keberangkatan);
             editTjn.setText(user.tujuan);
-
-
         } else {
             isEdit = false;
         }
@@ -74,24 +76,54 @@ public class EditOrder extends AppCompatActivity {
                 finish();
                 updateNotification();
             }
-
-            public void updateNotification() {
-//                Bitmap androidImage = BitmapFactory
-//                        .decodeResource(getResources(),R.drawable.mascot_1);
-//
-//                NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
-//                notifyBuilder.setStyle(new NotificationCompat.BigPictureStyle()
-//                        .bigPicture(androidImage)
-//                        .setBigContentTitle("Notifikasi Diupdate!"));
-//
-//                mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
-            }
-
-
         });
         Toolbar toolbar = findViewById(R.id.toolbaredit);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
 
+    public void createNotificationChannel() {
+        mNotifyManager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >=
+                android.os.Build.VERSION_CODES.O) {
+            // Create a NotificationChannel
+            NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID_1,
+                    "Edit Order", NotificationManager
+                    .IMPORTANCE_HIGH);
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setDescription("Notification from Edit");
+            mNotifyManager.createNotificationChannel(notificationChannel);
+        }
+    }
+
+    public void updateNotification() {
+        Bitmap androidImage = BitmapFactory
+                .decodeResource(getResources(),R.drawable.update);
+
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
+        notifyBuilder.setStyle(new NotificationCompat.BigPictureStyle()
+                .bigPicture(androidImage)
+                .setBigContentTitle("Update!"));
+
+        mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
+    }
+    private NotificationCompat.Builder getNotificationBuilder() {
+        Intent notificationIntent = new Intent(this, History.class);
+        PendingIntent notificationPendingIntent = PendingIntent.getActivity(this,
+                NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID_1)
+                .setContentTitle("Update!!!")
+                .setContentText("Pesanan Diupdate!")
+                .setContentIntent(notificationPendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setSmallIcon(R.drawable.ic_android);
+
+        return notifyBuilder;
     }
 }
