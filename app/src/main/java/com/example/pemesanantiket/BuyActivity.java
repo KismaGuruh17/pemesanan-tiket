@@ -102,7 +102,7 @@ public class BuyActivity extends AppCompatActivity {
 
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
 // for update notif
-        notifyBuilder.addAction(R.drawable.ic_update, "Edit Data", updatePendingIntent);
+//        notifyBuilder.addAction(R.drawable.ic_update, "Edit Data", updatePendingIntent);
 
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
 

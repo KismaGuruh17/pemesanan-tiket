@@ -1,6 +1,7 @@
 package com.example.pemesanantiket;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +10,12 @@ import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    private final CustomReceiver mReceiver = new CustomReceiver();
 
     private Switch mode_switch;
 
@@ -21,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mode_switch=findViewById(R.id.mode_switch);
+
+        IntentFilter filter = new IntentFilter();
+
+        filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        filter.addAction(Intent.ACTION_POWER_CONNECTED);
+
+        this.registerReceiver(mReceiver, filter);
 
         btnPesawat = findViewById(R.id.btnPesawat);
         btnKapal = findViewById(R.id.btnKapal);
@@ -72,6 +84,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
+    @Override
+    protected void onDestroy() {
+        // Unregister the receiver.
+        this.unregisterReceiver(mReceiver);
+        super.onDestroy();
+
+        /////////////////////////////////////
+        LocalBroadcastManager.getInstance(this)
+                .unregisterReceiver(mReceiver);
+    }
+
 }
