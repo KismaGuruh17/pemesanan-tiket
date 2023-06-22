@@ -3,23 +3,31 @@ package com.example.pemesanantiket;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
 public class MainActivity extends AppCompatActivity {
+
 
     private final CustomReceiver mReceiver = new CustomReceiver();
 
     private Switch mode_switch;
 
     private Button btnPesawat, btnKapal, btnKereta, btnHistory;
+
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,4 +104,12 @@ public class MainActivity extends AppCompatActivity {
                 .unregisterReceiver(mReceiver);
     }
 
-}
+        @Override
+        public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+            if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
