@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
@@ -21,22 +22,20 @@
             android:enabled="true"
             android:exported="true"
             android:permission="TODO"
-            tools:ignore="ExportedReceiver">
-        </receiver>
-
+            tools:ignore="ExportedReceiver" />
 
         <activity
             android:name=".EditOrder"
-            android:parentActivityName=".EditOrder"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".EditOrder" />
         <activity
             android:name=".History"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".BuyActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SplashScreen"
             android:exported="true">

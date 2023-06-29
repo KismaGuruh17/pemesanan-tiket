@@ -84,6 +84,35 @@
                 app:layout_anchorGravity="top|center" />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bannerBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Munculkan Banner"
+                android:textColor="@color/white"
+                android:backgroundTint="#03A9F4"
+                app:layout_anchor="@+id/imageView"
+                app:layout_anchorGravity="top|center" />
+
+        </LinearLayout>
+
+
+        <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -95,13 +124,55 @@
             app:cardUseCompatPadding="true">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/bnr1"
+                android:layout_width="277dp"
+                android:layout_height="140dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/banner_destinasi" />
 
         </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
+
+            <ImageView
+                android:id="@+id/bnr2"
+                android:layout_width="277dp"
+                android:layout_height="140dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/banner_destinasi" />
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
+
+            <ImageView
+                android:id="@+id/bnr3"
+                android:layout_width="277dp"
+                android:layout_height="140dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/banner_destinasi" />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    </HorizontalScrollView>
 
         <TextView
             android:layout_width="wrap_content"
