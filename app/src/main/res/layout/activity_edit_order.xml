@@ -112,6 +112,7 @@
                             android:hint="Masukan nama lengkap"
                             android:imeOptions="actionNext"
                             android:inputType="text"
+                            android:padding="7dp"
                             android:maxLines="1"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
@@ -143,12 +144,12 @@
                             <EditText
                                 android:id="@+id/spBerangkat"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
+                                android:layout_height="48dp"
                                 android:layout_below="@+id/tvBerangkat"
-                                android:hint="Kota Asal"
-                                android:padding="7dp"
                                 android:layout_marginTop="10dp"
                                 android:background="@drawable/spinner_background"
+                                android:hint="Kota Asal"
+                                android:padding="7dp"
                                 android:spinnerMode="dropdown" />
 
                         </RelativeLayout>
@@ -177,13 +178,13 @@
 
                             <EditText
                                 android:id="@+id/spTujuan"
-                                android:hint="Kota Tujuan"
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:padding="7dp"
+                                android:layout_height="48dp"
                                 android:layout_below="@+id/tvTujuan"
                                 android:layout_marginTop="10dp"
                                 android:background="@drawable/spinner_background"
+                                android:hint="Kota Tujuan"
+                                android:padding="7dp"
                                 android:spinnerMode="dropdown" />
 
                         </RelativeLayout>
@@ -215,6 +216,7 @@
                             android:imeOptions="actionDone"
                             android:inputType="number"
                             android:maxLength="12"
+                            android:padding="7dp"
                             android:maxLines="1"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
